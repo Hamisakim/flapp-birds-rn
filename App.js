@@ -1,21 +1,35 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React from 'react'
+import { Dimensions, StyleSheet, Text, View } from 'react-native'
+import Bird from './components/Bird'
 
-export default function App() {
+const App = () => {
+
+  const screenWidth  = Dimensions.get('screen').width
+  const screenHeight = Dimensions.get('screen').height
+  
+  console.log('🐝 ~ screenWidth', screenWidth)
+  console.log('🐝 ~ screenHeight', screenHeight)
+
+
+
+
   return (
     <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
+      <Bird/>
     </View>
-  );
+  )
 }
+
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
     alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+    justifyContent: 'center'
+  }
+})
+
+
+
+export default App
