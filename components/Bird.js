@@ -16,6 +16,7 @@ const Bird = ({ birdBottom, birdLeft }) => {
       height: birdHeight,
       left: birdLeft - (birdWidth / 2),
       bottom: birdBottom - (birdHeight / 2)
+      
     }}>
 
     </View>

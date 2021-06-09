@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Dimensions, StyleSheet, View, TouchableWithoutFeedback } from 'react-native'
+import { Dimensions, StyleSheet, View, TouchableWithoutFeedback, Text } from 'react-native'
 import Bird from './components/Bird'
 import Obstacles from './components/Obstacles'
 
@@ -8,17 +8,13 @@ const App = () => {
   const screenWidth  = Dimensions.get('screen').width
   const screenHeight = Dimensions.get('screen').height
   const birdLeft = screenWidth / 2 
-  console.log('🐝 ~ birdLeft', birdLeft)
   const [birdBottom, setBirdBottom] = useState(screenHeight / 2)
-  console.log('🐝 ~ birdBottom', birdBottom)
   const [obstaclesLeft, setObstaclesLeft] = useState(screenWidth)
-  console.log('🐝 ~ obstaclesLeft', obstaclesLeft)
   const [obstaclesLeftTwo, setObstaclesLeftTwo] = useState(screenWidth + screenWidth / 2 + 30)
-  console.log('🐝 ~ obstaclesLeftTwo', obstaclesLeftTwo)
-
   const [obstaclesNegHeight, setObstaclesNegHeight] = useState(0)
   const [obstaclesNegHeightTwo, setObstaclesNegHeightTwo] = useState(0)
-
+  const [score, setScore] = useState(0)
+  const [isGameOver, setIsGameOver] = useState(false)
   const obstacleWidth = 60 
   const obstacleHeight = 300
   const gap = 200
@@ -26,7 +22,6 @@ const App = () => {
   let gameTimerId 
   let obstaclesLeftTimerId
   let obstaclesLeftTimerIdTwo
-  const [isGameOver, setIsGameOver] = useState(false)
 
   /// start the birds falling
   useEffect(() => {
@@ -46,11 +41,7 @@ const App = () => {
       setBirdBottom(birdBottom=> birdBottom + 50)
       console.log('jumped 🟩')
     }
-
-
-
   }
-
 
 
   /// Start first obstacles
@@ -65,7 +56,7 @@ const App = () => {
     } else {
       setObstaclesLeft(screenWidth)
       setObstaclesNegHeight( - Math.random() * 100)
-
+      setScore(score => score + 1 )
     }
   }, [obstaclesLeft]) 
 
@@ -81,6 +72,7 @@ const App = () => {
     } else {
       setObstaclesLeftTwo(screenWidth)
       setObstaclesNegHeightTwo( - Math.random() * 100)
+      setScore(score => score + 1 )
     }
   }, [obstaclesLeftTwo]) 
 
@@ -116,6 +108,7 @@ const App = () => {
     
     <TouchableWithoutFeedback onPress={jump}>
       <View style={styles.container}>
+        {isGameOver && <Text>{score}</Text>}
         <Bird 
           birdBottom={birdBottom}
           birdLeft={birdLeft}
