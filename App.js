@@ -108,13 +108,34 @@ const App = () => {
     setIsGameOver(true)
   }
 
+  function refreshPage() {
+    console.log('🟢')
+
+    window.location.reload()
+  }
 
   return (
     <ImageBackground source={spaceBG} style={styles.backgroundImage}>
       <TouchableWithoutFeedback onPress={jump}>
         <View style={styles.container}>
           <StatusBar score={score}/>
-          {isGameOver && <Text>{score}</Text>}
+          {isGameOver && 
+          <View style={{
+            zIndex: 3,
+            backgroundColor: '#786766'
+          }}>
+            <Text style={{
+              zIndex: 3,
+              color: 'white',
+              fontSize: '2rem',
+              textAlign: 'center',
+              fontWeight: 'bold'
+            }}>
+            Oh no you are dead. your score was {score}. <br/>
+              <h2 onClick={refreshPage} >press here to restart</h2>
+            </Text>
+          </View>}
+          
 
 
           <Bird 
