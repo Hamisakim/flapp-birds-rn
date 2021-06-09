@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Dimensions, StyleSheet, View, TouchableWithoutFeedback, Text,ImageBackground } from 'react-native'
+// import { NavigationEvents } from 'react-navigation'
 import Bird from './components/Bird'
 import Obstacles from './components/Obstacles'
 import spaceBG from './assets/spaceBG.jpeg'
@@ -108,12 +109,12 @@ const App = () => {
     setIsGameOver(true)
   }
 
-  function refreshPage() {
-    console.log('🟢')
 
-    window.location.reload()
+  const refreshPage = () => {
+    console.log('refresh 💜')
+    
+
   }
-
   return (
     <ImageBackground source={spaceBG} style={styles.backgroundImage}>
       <TouchableWithoutFeedback onPress={jump}>
@@ -124,15 +125,15 @@ const App = () => {
             zIndex: 3,
             backgroundColor: '#786766'
           }}>
-            <Text style={{
+            <Text onPress={refreshPage} style={{
               zIndex: 3,
               color: 'white',
-              fontSize: '2rem',
               textAlign: 'center',
+              fontSize: 20,
               fontWeight: 'bold'
             }}>
-            Oh no you are dead. your score was {score}. <br/>
-              <h2 onClick={refreshPage} >press here to restart</h2>
+            Oh no you are dead. your score was {score}.
+              press here to restart
             </Text>
           </View>}
           
@@ -174,7 +175,7 @@ const styles = StyleSheet.create({
   },
   backgroundImage: {
     flex: 1,
-    resizeMode: 'fill',
+    resizeMode: 'cover',
     justifyContent: 'center'
   
   }
