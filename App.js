@@ -1,10 +1,14 @@
 import React, { useEffect, useState } from 'react'
-import { Dimensions, StyleSheet, View, TouchableWithoutFeedback, Text } from 'react-native'
+import { Dimensions, StyleSheet, View, TouchableWithoutFeedback, Text,ImageBackground } from 'react-native'
 import Bird from './components/Bird'
 import Obstacles from './components/Obstacles'
+import spaceBG from './assets/spaceBG.jpeg'
+import StatusBar from './components/StatusBar'
+
+
 
 const App = () => {
-
+  //#region  //*Variables
   const screenWidth  = Dimensions.get('screen').width
   const screenHeight = Dimensions.get('screen').height
   const birdLeft = screenWidth / 2 
@@ -22,7 +26,8 @@ const App = () => {
   let gameTimerId 
   let obstaclesLeftTimerId
   let obstaclesLeftTimerIdTwo
-
+  //#endregion
+  
   /// start the birds falling
   useEffect(() => {
     if (birdBottom > 0 ){
@@ -105,43 +110,52 @@ const App = () => {
 
 
   return (
-    
-    <TouchableWithoutFeedback onPress={jump}>
-      <View style={styles.container}>
-        {isGameOver && <Text>{score}</Text>}
-        <Bird 
-          birdBottom={birdBottom}
-          birdLeft={birdLeft}
-        />
-        <Obstacles 
-          color={'orange'}
-          obstacleWidth={obstacleWidth} 
-          obstacleHeight={obstacleHeight}
-          randomBottom={obstaclesNegHeight}
-          obstaclesLeft={obstaclesLeft} 
-          gap={gap}
-        />
-        <Obstacles 
-          color={'yellow'}
-          obstacleWidth={obstacleWidth} 
-          obstacleHeight={obstacleHeight}
-          randomBottom={obstaclesNegHeightTwo}
+    <ImageBackground source={spaceBG} style={styles.backgroundImage}>
+      <TouchableWithoutFeedback onPress={jump}>
+        <View style={styles.container}>
+          <StatusBar score={score}/>
+          {isGameOver && <Text>{score}</Text>}
 
-          obstaclesLeft={obstaclesLeftTwo} 
-          gap={gap}
-        />
-      </View>
-    </TouchableWithoutFeedback>
+
+          <Bird 
+            birdBottom={birdBottom}
+            birdLeft={birdLeft}
+          />
+          <Obstacles 
+            // color={'orange'}
+            obstacleWidth={obstacleWidth} 
+            obstacleHeight={obstacleHeight}
+            randomBottom={obstaclesNegHeight}
+            obstaclesLeft={obstaclesLeft} 
+            gap={gap}
+          />
+          <Obstacles 
+            // color={'yellow'}
+            obstacleWidth={obstacleWidth} 
+            obstacleHeight={obstacleHeight}
+            randomBottom={obstaclesNegHeightTwo}
+
+            obstaclesLeft={obstaclesLeftTwo} 
+            gap={gap}
+          />
+        </View>
+      </TouchableWithoutFeedback>
+    </ImageBackground>
   )
 }
-
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    // backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center'
+  },
+  backgroundImage: {
+    flex: 1,
+    resizeMode: 'fill',
+    justifyContent: 'center'
+  
   }
 })
 

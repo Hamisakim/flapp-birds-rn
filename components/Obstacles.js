@@ -1,5 +1,6 @@
 import React from 'react'
-import { View } from 'react-native'
+import { View,Image } from 'react-native'
+import lightning from '../assets/lightning.gif'
 
 const Obstacles = ({ 
   color, 
@@ -9,8 +10,6 @@ const Obstacles = ({
   gap,
   randomBottom
 }) => {
-
-  
   return (
     <>
     <View  style = {{
@@ -20,7 +19,13 @@ const Obstacles = ({
       height: obstacleHeight,
       left: obstaclesLeft,
       bottom: randomBottom + obstacleHeight + gap 
-    }}/>
+    }}>
+      <Image source={lightning} style={{
+        flex: 1,
+        resizeMode: 'repeat',
+        justifyContent: 'center'
+      }}/>
+    </View>
    
    <View  style = {{
      position: 'absolute',
@@ -29,8 +34,13 @@ const Obstacles = ({
      height: obstacleHeight,
      left: obstaclesLeft,
      bottom: randomBottom
-   }}/>
-   
+   }}>
+     <Image source={lightning} style={{
+       flex: 1,
+       resizeMode: 'repeat',
+       justifyContent: 'center'
+     }}/>
+   </View>
    
    
    
